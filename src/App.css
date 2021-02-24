@@ -1,25 +1,55 @@
-.App {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 50px;
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap');
+
+body {
+  margin: 0;
+  background: #C9D6FF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ 
 }
 
-.buttonCat {
-  width: 100px;
-  height: 50px;
-  background-color: red;
+* {
+  font-family: 'Kalam', cursive;
 }
 
-.buttonDog {
-  width: 100px;
-  height: 50px;
-  background-color: blue;
+.image-conainer {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  
 }
 
 .container {
-  padding: 5rem;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.buttons-container {
+  display: flex;
+  width: 400px;
+  margin-top: 24px;
+}
+
+.button {
+  width: 100%;
+  padding: 16px 0;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: 200ms ease-in-out all;
+  font-weight: bold;
+  color: #fff;
+  outline: 0;
+  font-size: 18px;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  filter: brightness(110%);
 }

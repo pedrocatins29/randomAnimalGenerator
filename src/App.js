@@ -36,26 +36,38 @@ function App() {
 
   return (
     <div className="container">
-      <div className="App">
-        <button onClick={() => fetchCats()} className="buttonCat">
+      <h1 style={{ marginTop: 0 }}>Clique nos botões para gerar imagens</h1>
+      {loading ?
+        <img
+          src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/cd514331234507.564a1d2324e4e.gif"
+          className="image-conainer"
+          style={{ boxShadow: 'none' }}
+        /> :
+        <>
+          {currentImage ? (
+            <img
+              src={currentImage}
+              className="image-conainer"
+            />
+          ) : (
+            <img
+              src="https://thumbs.gfycat.com/HeartfeltOrderlyIrishredandwhitesetter.webp"
+              className="image-conainer"
+              style={{ boxShadow: 'none' }}
+            />
+          )}
+        </>
+      }
+
+      
+      <div className="buttons-container">
+        <button onClick={() => fetchCats()} className="button" style={{ marginRight: 12, backgroundColor: '#d9a7c7' }}>
           Gerar um gato
         </button>
-        <button onClick={() => fetchDogs()} className="buttonDog">
+        <button onClick={() => fetchDogs()} className="button" style={{ backgroundColor: '#7ceeac' }}>
           Gerar um cachorro
         </button>
       </div>
-
-      <span>{loading ? "carregando ..." : null}</span>
-
-      {currentImage ? (
-        <img src={currentImage} width="400px" height="400px" />
-      ) : (
-        <img
-          src="https://image.flaticon.com/icons/png/512/130/130864.png"
-          width="400px"
-          height="400px"
-        />
-      )}
     </div>
   );
 }
