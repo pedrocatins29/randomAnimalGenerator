@@ -49,7 +49,7 @@ function App() {
   };
   return (
     <div className="container">
-      <h1 style={{ marginTop: 0 }}>Clique nos botões para gerar imagens</h1>
+      <h1 className="title">Clique nos botões para gerar imagens</h1>
       {loading ? (
         <img
           src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/cd514331234507.564a1d2324e4e.gif"

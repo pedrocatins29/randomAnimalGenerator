@@ -11,15 +11,6 @@ body {
   font-family: 'Kalam', cursive;
 }
 
-.image-conainer {
-  width: 400px;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  
-}
-
 .container {
   width: 100vw;
   height: 100vh;
@@ -27,6 +18,19 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.title {
+  margin-top: 0;
+  text-align: center;
+}
+
+.image-conainer {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .buttons-container {
@@ -52,4 +56,18 @@ body {
 .button:hover {
   transform: scale(1.05);
   filter: brightness(110%);
+}
+
+
+@media screen and (max-width: 600px) {
+  .buttons-container, .title {
+    width: 90vw;
+  }
+  .image-conainer {
+    width: 90vw;
+    height: 90vw;
+  }
+  .button {
+    font-size: 16px;
+  }
 }
