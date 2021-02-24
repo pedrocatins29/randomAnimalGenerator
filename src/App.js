@@ -42,18 +42,21 @@ function App() {
           src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/cd514331234507.564a1d2324e4e.gif"
           className="image-conainer"
           style={{ boxShadow: 'none' }}
+          alt="gifDogCat"
         /> :
         <>
           {currentImage ? (
             <img
               src={currentImage}
               className="image-conainer"
+              alt="imageLoaded"
             />
           ) : (
             <img
               src="https://thumbs.gfycat.com/HeartfeltOrderlyIrishredandwhitesetter.webp"
               className="image-conainer"
               style={{ boxShadow: 'none' }}
+              alt="gitLoading"
             />
           )}
         </>
