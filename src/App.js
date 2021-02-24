@@ -1,9 +1,30 @@
 import "./App.css";
 import { useState } from "react";
+// app/app.js
+import { timeoutPromise, retry } from "./utils/promise-helpers.js";
+import "./utils/array-helpers.js";
+import {
+  takeUntil,
+  debounceTime,
+  partialize,
+  pipe,
+} from "./utils/operators.js";
+import { EventEmitter } from "./utils/event-emitter.js";
 
 function App() {
   const [currentImage, setCurrentImage] = useState(undefined);
   const [loading, setLoading] = useState(false);
+
+  const operations = pipe(
+    partialize(takeUntil, 3),
+    partialize(debounceTime, 500)
+  );
+
+  const action = operations(() =>
+    retry(3, 3000, () => timeoutPromise(200, fetchDogs()))
+      .then((total) => EventEmitter.emit("itensTotalizados", total))
+      .catch(console.log)
+  );
 
   const fetchDogs = async () => {
     try {
@@ -37,10 +58,10 @@ function App() {
   return (
     <div className="container">
       <div className="App">
-        <button onClick={() => fetchCats()} className="buttonCat">
+        <button onClick={() => action()} className="buttonCat">
           Gerar um gato
         </button>
-        <button onClick={() => fetchDogs()} className="buttonDog">
+        <button onClick={() => action()} className="buttonDog">
           Gerar um cachorro
         </button>
       </div>
@@ -48,9 +69,15 @@ function App() {
       <span>{loading ? "carregando ..." : null}</span>
 
       {currentImage ? (
-        <img src={currentImage} width="400px" height="400px" />
+        <img
+          src={currentImage}
+          alt="animalimage"
+          width="400px"
+          height="400px"
+        />
       ) : (
         <img
+          alt="seta"
           src="https://image.flaticon.com/icons/png/512/130/130864.png"
           width="400px"
           height="400px"
