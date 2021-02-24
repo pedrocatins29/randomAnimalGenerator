@@ -1,8 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-// app/app.js
 import { timeoutPromise, retry } from "./utils/promise-helpers.js";
-import "./utils/array-helpers.js";
 import {
   takeUntil,
   debounceTime,
@@ -21,40 +19,34 @@ function App() {
   );
 
   const action = operations(() =>
-    retry(3, 3000, () => timeoutPromise(200, fetchDogs()))
-      .then((total) => EventEmitter.emit("itensTotalizados", total))
+    retry(1, 3000, () => timeoutPromise(200, fetchAnimal("dog")))
+      .then((total) => EventEmitter.emit("animalColetado", total))
       .catch(console.log)
   );
 
-  const fetchDogs = async () => {
+  const actionCat = operations(() =>
+    retry(1, 3000, () => timeoutPromise(200, fetchAnimal("cat")))
+      .then((total) => EventEmitter.emit("animalColetado", total))
+      .catch(console.log)
+  );
+
+  const fetchAnimal = async (animal) => {
     try {
       setLoading(true);
-      const result = await fetch("https://dog.ceo/api/breeds/image/random");
+      const result = await fetch(
+        animal === "dog"
+          ? "https://dog.ceo/api/breeds/image/random"
+          : "https://aws.random.cat/meow"
+      );
       const parsedResult = await result.json();
-
-      if (parsedResult.status === "success") {
-        setCurrentImage(parsedResult.message);
-        setLoading(false);
-      } else {
-        alert("aconteceu algo de errado com o seu request 😔");
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const fetchCats = async () => {
-    try {
-      setLoading(true);
-      const result = await fetch("https://aws.random.cat/meow");
-      const parsedResult = await result.json();
-      setCurrentImage(parsedResult.file);
+      animal === "dog"
+        ? setCurrentImage(parsedResult.message)
+        : setCurrentImage(parsedResult.file);
       setLoading(false);
     } catch (error) {
       alert(error);
     }
   };
-
   return (
     <div className="container">
       <h1 style={{ marginTop: 0 }}>Clique nos botões para gerar imagens</h1>
@@ -86,14 +78,14 @@ function App() {
 
       <div className="buttons-container">
         <button
-          onClick={() => action()}
+          onClick={actionCat}
           className="button"
           style={{ marginRight: 12, backgroundColor: "#d9a7c7" }}
         >
           Gerar um gato
         </button>
         <button
-          onClick={() => action()}
+          onClick={action}
           className="button"
           style={{ backgroundColor: "#7ceeac" }}
         >
